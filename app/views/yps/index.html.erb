@@ -1,0 +1,65 @@
+
+<% if user_signed_in? %>
+
+<h2>Список контактов</h2>
+<br/>
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Имя</th>
+      <th>Эл. почта</th>
+      <th>Телефон</th>
+      <th>Личный сайт</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @yps.each do |yp| %>
+      <% if yp.user == current_user %>
+      <tr>
+        <td>
+          <%= link_to yp.first_name + ' ' + yp.last_name, yp %> 
+        </td>
+        <td><%= yp.email %></td>
+        <td><%= yp.phone %></td>
+        <td><%= yp.socnet %></td>
+        
+        <td><%= link_to 'Редактировать', edit_yp_path(yp), class: "btn btn-outline-secondary btn-sm" %></td>
+        <td><%= link_to 'Удалить', yp, method: :delete, data: { confirm: 'Удалить контакт?' }, class: "btn btn-outline-danger btn-sm" %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Создать контакт', new_yp_path, class:"btn btn-dark" %>
+
+<% else %>
+
+<h1>Contacts позволяет хранить ваши контакты.</h1>
+<p>Чтобы начать добавлять контакты, войдите или зарегистрируйтесь :)</p>
+
+<div class="card" style="width: 100;">
+  <%= image_tag("add.jpg", :alt => "add") %>
+  <div class="card-body">
+    <h5 class="card-title text-center">добавляйте ваших друзей/знакомых/etc с их контактами</h5>
+  </div>
+</div>
+<br/><br/>
+<div class="card" style="width: 100;">
+  <%= image_tag("list.jpg", :alt => "list") %>
+  <div class="card-body">
+    <h5 class="card-title text-center">создайте свой список контактов</h5>
+  </div>
+</div>
+<br/><br/>
+<div class="card" style="width: 100;">
+  <%= image_tag("card.jpg", :alt => "card") %>
+  <div class="card-body">
+    <h5 class="card-title text-center">просматривайте/редактируйте/удаляйте контакты</h5>
+  </div>
+</div>
+<% end %>

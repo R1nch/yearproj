@@ -1,0 +1,48 @@
+<%= form_with(model: yp) do |form| %>
+  <% if yp.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(yp.errors.count, "error") %> prohibited this yp from being saved:</h2>
+
+      <ul>
+        <% yp.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    
+    <%= form.text_field :first_name, class:"form-control", placeholder:"Имя" %>
+  </div>
+
+  <div class="field form-group">
+    
+    <%= form.text_field :last_name, class:"form-control", placeholder:"Фамилия" %>
+  </div>
+
+  <div class="field form-group">
+    
+    <%= form.text_field :email, class:"form-control", placeholder:"Эл. почта" %>
+  </div>
+
+  <div class="field form-group">
+    
+    <%= form.text_field :phone, class:"form-control", placeholder:"Телефон" %>
+  </div>
+
+  <div class="field form-group">
+    
+    <%= form.text_field :socnet, class:"form-control", placeholder:"Личный сайт" %>
+  </div>
+
+  <div class="field form-group">
+    
+    <%= form.number_field :user_id, id: :yp_user_id, class:"form-control", value: current_user.id, type: :hidden %>
+  </div>
+  
+<br/>
+  <div class="actions">
+    <%= form.submit "Подтвердить", class:'btn btn-dark' %>
+  </div>
+<% end %>
